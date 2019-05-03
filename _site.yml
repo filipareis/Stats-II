@@ -1,11 +1,13 @@
-name: "Statistics II"
+name: Statistics II
 output_dir: "."
 navbar:
   title: "Course Materials"
   left:
-    - text: "Index"
+    - text: "Description"
       href: index.html
+    - text: "Project_guidelines"
+      href: project_guidelines.html
     - text: "Syllabus"
       href: syllabus.html
-    - text: "Project Guide"
-      href: project_guidelines.html
+    - text: "Email Prof. Filipa Reis"
+      href: mailto:filipareis@ucp.pt
