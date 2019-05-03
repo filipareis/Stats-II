@@ -1,0 +1,9 @@
+name: "my-website-name"
+output_dir: "."
+navbar:
+  title: "Website title"
+  left:
+    - text: "Syllabus"
+      href: syllabus.html
+    - text: "Project Guide"
+      href: project_guidelines.html
