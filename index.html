@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Spring 2018/2019, Prof. Filipa Reis" />
+
+
+<title>Statistics II</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/lumen.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 54px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+
+.section h2 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h3 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h4 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h5 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+.section h6 {
+  padding-top: 59px;
+  margin-top: -59px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Website title</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="syllabus.html">Syllabus</a>
+</li>
+<li>
+  <a href="project_guidelines.html">Project Guide</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Statistics II</h1>
+<h3 class="subtitle"><em>Catolica-Lisbon School of Business and Economics</em></h3>
+<h4 class="author"><em>Spring 2018/2019, Prof. Filipa Reis</em></h4>
+
+</div>
+
+
+<p>Practical Sessions: Patricia Cruz; Carlota Galhardas</p>
+<div id="course-description" class="section level2">
+<h2>Course Description</h2>
+<p>Statistics II is a second year course of the undergraduate programs in Economics and Business Administration, including topics on sampling, statistical inference (confidence interval estimation and hypothesis testing), simple and multiple regression analysis, ANOVA, and analysis of categorical data.</p>
+</div>
+<div id="course-content" class="section level2">
+<h2>Course Content</h2>
+<ol style="list-style-type: decimal">
+<li>Introduction</li>
+<li>Random sampling and sampling distributions</li>
+<li>Properties of estimators</li>
+<li>Confidence interval estimation</li>
+<li>Hypothesis tests</li>
+<li>Simple linear regression</li>
+<li>Multiple regression</li>
+<li>Analysis of variance</li>
+</ol>
+</div>
+<div id="course-objectives" class="section level2">
+<h2>Course Objectives</h2>
+<p>Upon successful completion of this course, students should be able to complete the following tasks:</p>
+<ul>
+<li>Understand the basic concepts of sampling and inferential statistics and compute various inferential statistics;</li>
+<li>Perform hypothesis testing applying probability theory, quantifying the probability of committing an error and distinguishing the different types of statistical errors;</li>
+<li>Formalize regression models, perform the estimation of parameters and interpret the results;</li>
+<li>Understand the differences among various statistical techniques and identify the appropriate technique to be used in a specific problem.</li>
+</ul>
+</div>
+<div id="grading" class="section level2">
+<h2>Grading</h2>
+<ul>
+<li>Homework (10%)</li>
+<li>2 Midterm exams (35% each, minimum grade &gt; 7.5/20)</li>
+<li>1 group project (20%)</li>
+</ul>
+<p>Final Grade = 0.1 Avg. Homework + 0.35 Midterm 1 + 0.35 Midterm 2 + 0.2 Group Project</p>
+<p>IF: Final Grade ≥ 9.5/20 BUT Midterm 1 OR Midterm 1 &lt; 7.5/20 OR: Final Grade is between 7.5/20 and 9.5/20 THEN: The student must take a Final Exam. In this case, the final grade will be the grade of the final exam. To pass the course, the student must have a grade of 9.5 or higher in the Final Exam.</p>
+<p>IF: Final Grade ≤ 7.5/20 OR Average of Midterm 1 and Midterm 2 ≤ 6.5/20 THEN: The student will fail the course and be excluded from the final exam.</p>
+<p>IF: Final Grade ≥ 9.5/20 AND Midterm 1 AND Midterm 1 &gt; 7.5/20 THEN: The student may take the final exam for improving the grade. In that case, the final exam will account for 50% of the final grade.</p>
+<p>Midterm Exams: There will be two mid-term examinations, each covering half of the class contents. The midterm exams are closed book and closed notes.</p>
+<p>Group Project: The course project will allow students to apply the skills acquired to statistically treat a sample of raw data. The project is a group work, and each group should have four members. The objective is to prepare a written report of the analysis and findings. Further information about the project will be provided in class.</p>
+<p>Class Participation: The students are encouraged to actively participate in both theoretical and practical classes.</p>
+<p>Final Exam: The final exam will cover the entire course’s program.</p>
+</div>
+<div id="class-materials" class="section level2">
+<h2>Class Materials</h2>
+<ul>
+<li><strong>Recommended textbook</strong>: Newbold, P., W. L. Carlson and B. Thorne, Statistics for Economics and Business, 8th edition, Pearson, 2013</li>
+<li>Lecture slides</li>
+<li>Exercise book for practical sessions (chapters will be posted separately on Moodle)</li>
+<li>Scientific calculator (check with your TA if your calculator is appropriate)</li>
+</ul>
+<p>Other Recommended Textbooks:</p>
+<ul>
+<li>McClave, J.T, Sincich, T., Statistics, 12th edition, Pearson, 2013</li>
+<li>Heumann, C., Schomaker, M., Shalabh, Introduction to Statistics and Data Analysis With Exercises, Solutions, and Applications in R, Springer, 2016</li>
+<li>Caldwell, S., Statistics Unplugged, 4th edition, Cengage Learning, 2012</li>
+</ul>
+<p>Free online Textbooks:</p>
+<ul>
+<li>OpenIntro Statistics, 3rd Edition: <a href="https://www.openintro.org/stat/" class="uri">https://www.openintro.org/stat/</a></li>
+<li>Online Stat Book: <a href="http://onlinestatbook.com/2/index.html" class="uri">http://onlinestatbook.com/2/index.html</a></li>
+</ul>
+<p>Other free online resources:</p>
+<ul>
+<li>Khan Academy: Statistics and Probability (Class code: T6K6SGFU)</li>
+<li>YouTube: JBStatistics</li>
+<li>YouTube : Statisticsfun</li>
+<li>YouTube: Statistics Learning Centre</li>
+</ul>
+</div>
+<div id="biography" class="section level2">
+<h2>Biography</h2>
+<p>Filipa Reis: Invited Assistant Professor of Data Science at Católica Lisbon School of Business and Economics. Filipa holds a PhD in Public Policy and Management from Carnegie Mellon University, a MSc from CLSBE, and bachelor’s degree from Nova SBE. Her research focuses on media consumption patterns and the impact of digitization and convergence technologies on consumer choices and behaviors. She has also participated in experiment-driven business analytics consulting projects for policy formulation and evaluation in the telecommunications sector. Her work has been published in Management Science and presented at top peer-reviewed research conferences such as the International Conference of Information Systems and the Economics of Digitization Seminar Series of the National Bureau of Economic Research. Filipa teaches quantitative and data analysis courses at the undergraduate level including Statistics I, Statistics II, and Statistics for Business and Economics.</p>
+</div>
+<div id="contacts-and-office-hours" class="section level2">
+<h2>Contact(s) and Office hours</h2>
+<p>Filipa Reis</p>
+<p>Email: <a href="mailto:filipareis@ucp.pt">filipareis@ucp.pt</a></p>
+<p>Office: 532B</p>
+<p>Phone: + 352 217214961</p>
+<p>Office hours: To be defined</p>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
