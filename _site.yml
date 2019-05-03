@@ -5,5 +5,7 @@ navbar:
   left:
     - text: "Index"
       href: index.html
+    - text: "Syllabus"
+      href: syllabus.html
     - text: "Project Guide"
       href: project_guidelines.html
